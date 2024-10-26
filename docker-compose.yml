@@ -1,0 +1,31 @@
+services:
+  app:
+    build: .
+    env_file : .env
+    volumes:
+      - .:/app
+    ports:
+      - "80:9009"
+    networks :
+      - todo-invera
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=todo_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    networks :
+      - todo-invera
+
+networks :
+  todo-invera :
+    driver : bridge
+volumes:
+  postgres_data:
