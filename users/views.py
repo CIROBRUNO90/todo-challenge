@@ -14,6 +14,9 @@ from .serializers import (
 
 
 class RegisterView(APIView):
+    """
+    Permite la creación de nuevos usuarios
+    """
     def post(self, request):
         serializer = UserRegistrationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -29,6 +32,9 @@ class RegisterView(APIView):
 
 
 class LoginView(APIView):
+    """
+    Permite el inicio de sesión de usuarios
+    """
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -44,6 +50,9 @@ class LoginView(APIView):
 
 
 class LogoutView(APIView):
+    """
+    Permite el cierre de sesión de usuarios
+    """
     permission_classes = [IsAuthenticated]
 
     def post(self, request):

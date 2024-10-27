@@ -21,10 +21,16 @@ class TaskViewSet(viewsets.ModelViewSet):
 
         status = self.request.query_params.get('status', None)
         priority = self.request.query_params.get('priority', None)
+        title = self.request.query_params.get('title', None)
+        description = self.request.query_params.get('description', None)
         if status:
             queryset = queryset.filter(status=status)
         if priority:
             queryset = queryset.filter(priority=priority)
+        if title:
+            queryset = queryset.filter(title__icontains=title)
+        if description:
+            queryset = queryset.filter(description__icontains=description)
 
         return queryset
 
